@@ -84,7 +84,25 @@ cd nome-do-repositorio
 npm install
 ```
 
-### Passo 3: Rodar a aplicação Angular
+### Passo 3: Instalar o JSON Server
+
+```bash
+npm install -g json-server
+```
+
+### Passo 4: Instalar o JSON Server
+
+```bash
+npm install -g json-server
+```
+
+### Passo 5: Instalar o Concurrently para rodas ambos simultaneamente
+
+```bash
+npm install concurrently
+```
+
+### Passo 6: Rodar a aplicação Angular
 
 ```bash
 npm start
@@ -100,15 +118,6 @@ npm start
 - `POST /usuarios` → Cria um novo usuário  
 - `PUT /usuarios/:id` → Atualiza um usuário existente  
 - `DELETE /usuarios/:id` → Remove um usuário
-
----
-
-## 🌟 Deploy 
-A aplicação pode ser acessada em: `https://seu-projeto-angular.vercel.app`
-- Servidor (Render)
-- Aplicação (Netlify)
-
-
 ---
 
 ## 👩🏻‍💻 Autora
