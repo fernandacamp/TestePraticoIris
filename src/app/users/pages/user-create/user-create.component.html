@@ -39,8 +39,9 @@
         }
     </div>
     }
-    <app-button buttonStyle="primary" size="lg" [disabled]="form.invalid || loading">
+    <app-button buttonStyle="primary" size="md" [disabled]="form.invalid || loading" (click)="onSubmit()">
         {{ userEdit ? 'Editar Usuário' : 'Criar Usuário' }}
     </app-button>
+    <app-button buttonStyle="danger" size="md"> Cancelar </app-button>
 
 </form>

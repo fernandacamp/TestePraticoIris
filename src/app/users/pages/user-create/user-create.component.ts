@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User, UserService } from '../../../service/user/user.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SnackbarService } from '../../../service/snackbar/snackbar.service';
@@ -17,10 +17,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class UserCreateComponent implements OnInit {
 
   @Input() userEdit?: User;
+  @Output() close = new EventEmitter<void>();
 
   form!: FormGroup;
   loading: boolean = false;
-  userId?: number;
+  userId?: string = '';
   edit?: boolean = false;
 
   constructor(private fb: FormBuilder,
@@ -33,12 +34,11 @@ export class UserCreateComponent implements OnInit {
     this.initForm();
 
     this.route.paramMap.subscribe(params => {
-      const idParam = params.get('id');
-      if (idParam) {
-        const id = Number(idParam);
+      const id = params.get('id');
+      if (id) {
         this.userId = id;
         this.edit = true;
-        this.loadUserData(id); 
+        this.loadUserData(id);
       }
     });
   }
@@ -51,8 +51,9 @@ export class UserCreateComponent implements OnInit {
     });
   }
 
-  loadUserData(id: number) {
+  loadUserData(id: string) {
     this.userService.getUserById(id).subscribe(user => {
+      this.userEdit = user;
       this.form.patchValue({
         name: user.name,
         email: user.email,
@@ -67,6 +68,15 @@ export class UserCreateComponent implements OnInit {
     this.loading = true;
     const formValue = this.form.value;
 
+    if (this.userEdit && this.edit) {
+      const updateUser: User = {
+        id: this.userEdit.id,
+        name: formValue.name,
+        email: formValue.email,
+        age: formValue.age
+      }
+    }
+
     if (this.userEdit) {
       const updateUser: User = {
         id: this.userEdit.id,
@@ -78,10 +88,11 @@ export class UserCreateComponent implements OnInit {
       this.userService.updateUser(updateUser).subscribe(
         () => {
           this.snackbarService.showSnackbar({
-            message: 'Usuário editado com sucesso!',
+            message: `Dados do usuário ${this.userEdit!.name} editado com sucesso!`,
             type: 'success'
           });
           this.loading = false;
+          this.closeModal();
         },
         (err) => {
           this.snackbarService.showSnackbar({
@@ -96,25 +107,32 @@ export class UserCreateComponent implements OnInit {
       this.userService.addUser(formValue).subscribe(
         () => {
           this.snackbarService.showSnackbar({
-            message: 'Usuário criado com sucesso!',
+            message: `Usuário ${this.userEdit!.name} criado com sucesso!`,
             type: 'success'
           });
           this.loading = false;
-          this.form.reset();
+          this.closeModal();
         },
         (err) => {
           this.snackbarService.showSnackbar({
-            message: 'Erro ao criar usuário.',
+            message: 'Erro ao criar usuário',
             type: 'error'
           });
           this.loading = false;
-        }
+        },
       );
     }
   }
 
+
   get name() { return this.form.get('name'); }
   get email() { return this.form.get('email'); }
   get age() { return this.form.get('age'); }
+
+  closeModal() {
+    this.loading = false;
+    this.form.reset();
+    this.close.emit();
+  }
 
 }

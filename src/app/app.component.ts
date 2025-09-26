@@ -3,6 +3,7 @@ import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { ButtonComponent } from "./shared/components/button/button.component";
 import { filter } from 'rxjs/operators';
 import { TooltipComponent } from "./shared/components/tooltip/tooltip.component";
+import { SnackbarComponent } from "./shared/components/snackbar/snackbar.component";
 
 export enum PageType {
   List = 'list',
@@ -15,7 +16,7 @@ export enum PageType {
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,
-    ButtonComponent, TooltipComponent],
+    ButtonComponent, TooltipComponent, SnackbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

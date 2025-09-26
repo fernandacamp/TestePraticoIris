@@ -5,7 +5,9 @@
   transform: translateX(-50%) translateY(100%);
   padding: 12px 24px;
   border-radius: 8px;
+  font-family: var(--font-base);
   font-weight: var(--font-size-medium);
+  color: var(--color-text-white);
   opacity: 0;
   transition: transform 0.3s ease, opacity 0.3s ease;
   z-index: 1000;

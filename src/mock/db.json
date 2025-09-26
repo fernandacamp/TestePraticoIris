@@ -1,40 +1,10 @@
 {
   "usuarios": [
     {
-      "id": "4",
-      "name": "Carlos",
-      "email": "carlos@email.com",
-      "age": 28
-    },
-    {
-      "id": "5",
-      "name": "Mariana",
-      "email": "mariana@email.com",
-      "idade": 35
-    },
-    {
-      "id": "6",
-      "name": "Pedro",
-      "email": "pedro@email.com",
-      "age": 40
-    },
-    {
       "id": "7",
       "name": "Beatriz",
       "email": "beatriz@email.com",
       "age": 27
-    },
-    {
-      "id": "8",
-      "name": "Rafael",
-      "email": "rafael@email.com",
-      "age": 31
-    },
-    {
-      "id": "9",
-      "name": "Juliana",
-      "email": "juliana@email.com",
-      "age": 24
     },
     {
       "id": "10",
@@ -65,12 +35,6 @@
       "name": "Bruno",
       "email": "bruno@email.com",
       "age": 38
-    },
-    {
-      "id": "15",
-      "name": "Patrícia",
-      "email": "patricia@email.com",
-      "age": 36
     },
     {
       "id": "16",
@@ -131,12 +95,6 @@
       "name": "Bianca",
       "email": "bianca@email.com",
       "age": 26
-    },
-    {
-      "id": "26",
-      "name": "Eduardo",
-      "email": "eduardo@email.com",
-      "age": 45
     },
     {
       "id": "27",
@@ -281,6 +239,66 @@
       "name": "Elaine",
       "email": "elaine@email.com",
       "age": 28
+    },
+    {
+      "id": "dd1a",
+      "name": "Carlos",
+      "email": "carlos@email.com",
+      "age": 28
+    },
+    {
+      "id": "124d",
+      "name": "Carlos",
+      "email": "carlos@email.com",
+      "age": "18"
+    },
+    {
+      "id": "9d2b",
+      "name": "Joselina",
+      "email": "jolesina@gmail.com",
+      "age": "19"
+    },
+    {
+      "id": "1f25",
+      "name": "lucreia",
+      "email": "lucreia@gmail.com",
+      "age": "25"
+    },
+    {
+      "id": "125c",
+      "name": "Jordana",
+      "email": "jornada@gmail.com",
+      "age": "24"
+    },
+    {
+      "id": "9df7",
+      "name": "julina",
+      "email": "julina@gmail.com",
+      "age": "34"
+    },
+    {
+      "id": "cfe6",
+      "name": "joao babao",
+      "email": "joaobabao@gmail.com",
+      "age": "34"
+    },
+    {
+      "id": "7cb7",
+      "name": "fernanda",
+      "email": "fernanda@gmail.com",
+      "age": "34"
+    },
+    {
+      "id": "423b",
+      "name": "fernanda",
+      "email": "fernanda@hotmail.com",
+      "age": "23"
+    },
+    {
+      "id": "03d3",
+      "name": "lucianda",
+      "email": "launcia@hmotl.com",
+      "age": "25"
     }
   ]
 }

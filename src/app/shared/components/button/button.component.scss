@@ -53,6 +53,11 @@
   color: var(--color-primary);
 }
 
+.success {
+  background: var(--color-success);
+  color: var(--color-text-white);
+}
+
 .btn:hover:not(:disabled) {
   transform: scale(1.05);
 }

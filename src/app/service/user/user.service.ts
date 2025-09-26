@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface User {
-  id: number;
+  id: string;
   name: string;
   email: string;
   age: number;
@@ -14,6 +14,7 @@ export interface User {
 })
 export class UserService {
 
+  //private baseUrl = 'http://192.168.0.15:3000/usuarios';
   private baseUrl = 'http://localhost:3000/usuarios';
 
   /**
@@ -35,7 +36,7 @@ export class UserService {
    * @param id 
    * @returns 
    */
-  getUserById(id: number): Observable<User> {
+  getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
 
@@ -62,7 +63,7 @@ export class UserService {
    * @param id Identificação do usuário a ser excluído.
    * @returns Observable void que indica que a operação foi concluída sem retorno de body.
    */
-  deleteUser(id: number): Observable<void> {
+  deleteUser(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 

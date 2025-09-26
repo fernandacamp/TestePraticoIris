@@ -11,7 +11,7 @@ import { ɵEmptyOutletComponent } from "@angular/router";
 })
 export class ButtonComponent {
 
-  @Input() buttonStyle: 'primary' | 'danger' | 'outline' = 'primary';
+  @Input() buttonStyle: 'primary' | 'danger' | 'outline' | 'success' = 'primary';
   @Input() size: 'xsm' | 'sm' | 'md' | 'lg' = 'md';
   @Input() disabled: boolean = false;
   @Input() type: 'button' | 'submit' | 'reset' = 'button';

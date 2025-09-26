@@ -6,11 +6,12 @@ import { ConfirmDeleteModalComponent } from "../../../shared/components/confirm-
 import { LoaderComponent } from "../../../shared/components/loader/loader.component";
 import { TooltipComponent } from "../../../shared/components/tooltip/tooltip.component";
 import { Router } from '@angular/router';
+import { UserCreateComponent } from "../user-create/user-create.component";
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [TableComponent, ConfirmDeleteModalComponent, LoaderComponent, TooltipComponent],
+  imports: [TableComponent, ConfirmDeleteModalComponent, LoaderComponent, TooltipComponent, UserCreateComponent],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })
@@ -21,12 +22,14 @@ export class UserListComponent implements OnInit {
 
   loading: boolean = false;
 
-  selectUserToDelete: User | null = null;
+  selectUser: User | null = null;
   modalVisible: boolean = false;
 
-  constructor(private userService: UserService, 
-    private snackbarService: SnackbarService, 
-    private router: Router) {}
+  userModalVisible: boolean = false;
+
+  constructor(private userService: UserService,
+    private snackbarService: SnackbarService,
+    private router: Router) { }
 
   ngOnInit() {
     this.loadUsers();
@@ -47,53 +50,66 @@ export class UserListComponent implements OnInit {
           message: 'Erro ao carregar usuários.',
           type: 'success',
         });
-
-      },
+      }
     });
   }
 
 
   openModal(user: User) {
-    this.selectUserToDelete = user;
+    this.selectUser = user;
     this.modalVisible = true;
 
   }
 
   onDelete() {
-    if (!this.selectUserToDelete) return;
+    if (!this.selectUser) return;
     this.loading = true;
 
-    this.userService.deleteUser(this.selectUserToDelete.id).subscribe({
+    this.userService.deleteUser(this.selectUser.id).subscribe({
       next: () => {
-        setTimeout(() => {
-          this.users = this.users.filter(x => x.id !== this.selectUserToDelete!.id);
-          this.snackbarService.showSnackbar({
-            message: `Usuário ${this.selectUserToDelete!.name} deletado com sucesso.`,
-            type: 'success',
-          });
-          this.modalVisible = false;
-          this.selectUserToDelete = null;
-        }, 800);
+        this.users = this.users.filter(x => x.id !== this.selectUser!.id);
+        this.snackbarService.showSnackbar({
+          message: `Usuário ${this.selectUser!.name} deletado com sucesso.`,
+          type: 'success',
+        });
+        this.modalVisible = false;
+        this.selectUser = null;
       },
       error: () => {
         this.snackbarService.showSnackbar({
-          message: `Erro ao deletar o usuário ${this.selectUserToDelete!.name}.`,
+          message: `Erro ao deletar o usuário ${this.selectUser!.name}.`,
           type: 'error'
         });
         this.modalVisible = false;
-        this.selectUserToDelete = null;
+        this.selectUser = null;
       }
     });
     this.loadUsers();
   }
 
   cancelDelete() {
-    this.selectUserToDelete = null;
+    this.selectUser = null;
     this.modalVisible = false;
   }
 
   goToEdit(user: User) {
-    this.router.navigate(['user/edit', user.id]);
+    this.router.navigate(['users/edit', user.id]);
   }
+
+  openUserModal(user?: User) {
+    this.selectUser = user ? {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      age: user.age
+    } : null;
+    this.userModalVisible = true;
+  }
+
+  closeUserModal() {
+    this.userModalVisible = false;
+    this.selectUser = null;
+  }
+
 
 }

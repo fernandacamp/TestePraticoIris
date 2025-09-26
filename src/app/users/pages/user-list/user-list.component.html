@@ -26,6 +26,10 @@
 </app-table>
 
 <app-confirm-delete-modal [visible]="modalVisible" title="Excluir Usuário"
-    [message]="'Tem certeza que deseja excluir ' + selectUserToDelete?.name + '?'" (confirm)="onDelete()"
+    [message]="'Tem certeza que deseja excluir usuário ' + selectUser?.name + '?'" (confirm)="onDelete()"
     (cancel)="cancelDelete()">
 </app-confirm-delete-modal>
+
+<app-user-create 
+[userEdit]="selectUser"
+(close)="closeUserModal()" />
