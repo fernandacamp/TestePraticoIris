@@ -26,13 +26,9 @@ export class UserService {
    * Retorna a lista de usuários.
    * @returns Observable contendo um array de usuários.
    */
-  getUsers(page: number = 1, search: string = ''): Observable<HttpResponse<User[]>> {
+  getUsers(page: number = 1): Observable<HttpResponse<User[]>> {
     let params = new HttpParams()
       .set('_page', page);
-
-      if (search && search.trim() !== '') {
-        params = params.set('name', search.trim());
-      }
     return this.http.get<User[]>(this.baseUrl, { params, observe: 'response' });
   }
 

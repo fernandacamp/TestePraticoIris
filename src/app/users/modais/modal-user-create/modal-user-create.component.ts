@@ -50,7 +50,7 @@ export class ModalUserCreateComponent implements OnInit {
   private initForm() {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email], ],
       age: [null as number | null, [Validators.min(18), Validators.max(150)]]
     });
   }

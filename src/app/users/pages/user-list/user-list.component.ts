@@ -20,9 +20,9 @@ import { ModalUserCreateComponent } from '../../modais/modal-user-create/modal-u
     ConfirmDeleteModalComponent,
     LoaderComponent,
     TooltipComponent,
-    ModalUserCreateComponent, 
-    ButtonComponent, 
-    SnackbarComponent, 
+    ModalUserCreateComponent,
+    ButtonComponent,
+    SnackbarComponent,
     SearchBarComponent,
     FormsModule],
   templateUrl: './user-list.component.html',
@@ -50,25 +50,42 @@ export class UserListComponent implements OnInit {
   }
 
   loadUsers() {
-    this.loading = true;
-    
-    this.userService.getUsers(this.page, this.searchTerm).subscribe({
-      next: (response) => {
-        setTimeout(() => {
-          const body: any = response.body;
-          this.users = body.data || [];
-          this.totalUsers = body.items ?? 0,
-          this.loading = false;
-        }, 1500);
-      },
-      error: (error) => {
-        this.snackbarService.showSnackbar({
-          message: 'Erro ao carregar usuários.',
-          type: 'error',
-        });
-      }
-    });
-  }
+  this.loading = true;
+
+  this.userService.getUsers(this.searchTerm?.trim() ? 0 : this.page).subscribe({
+    next: (response) => {
+      setTimeout(() => {
+        const body: any = response.body;
+        const usersArray: any[] = Array.isArray(body)
+          ? body
+          : Array.isArray(body?.data)
+            ? body.data
+            : [];
+
+        const filteredUsers = (this.searchTerm?.trim())
+          ? usersArray.filter((x: any) =>
+              x.name?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+              x.email?.toLowerCase().includes(this.searchTerm.toLowerCase())
+            )
+          : usersArray;
+
+        const startIndex = (this.page - 1) * this.pageSize;
+        this.users = filteredUsers.slice(startIndex, startIndex + this.pageSize);
+
+        this.totalUsers = this.searchTerm?.trim() ? filteredUsers.length : body.items;
+        this.loading = false;
+      }, 1500);
+    },
+    error: (error) => {
+      this.loading = false;
+      this.snackbarService.showSnackbar({
+        message: 'Erro ao carregar usuários.',
+        type: 'error',
+      });
+    }
+  });
+}
+
 
   onSearch(term: string) {
     this.searchTerm = term;
