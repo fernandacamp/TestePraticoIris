@@ -51,6 +51,19 @@ tbody td {
   border-bottom: 1px solid var(--color-border);
 }
 
+tfoot {
+  background: var(--color-primary);
+  color: var(--color-text-white);
+  text-align: left;
+}
+
+tfoot th {
+  padding: 12px 16px;
+  font-weight: var(--font-weight-semi-bold);
+  font-size: var(--font-size-md);
+  color: var(--color-text-black);
+  border-bottom: 2px solid var(--color-border);
+}
 
 td img {
   cursor: pointer;

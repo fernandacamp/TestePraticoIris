@@ -1,0 +1,29 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-text-white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 400px;
+  max-width: 90%;
+  z-index: 1000;
+  box-shadow: 0 5px 10px var(--color-text-grey);
+  color: var(--color-text-dark-grey);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-base);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semi-bold);
+  }
+}
+

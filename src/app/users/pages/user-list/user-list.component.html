@@ -2,34 +2,61 @@
 <app-loader></app-loader>
 }
 
-<app-table [data]="users" [pageSize]="pageSize" [(currentPage)]="page">
-    <tr table-header>
-        <th>Nome</th>
-        <th>E-mail</th>
-        <th>Ações</th>
-    </tr>
-    @for (user of users; track user.id) {
-    <tr table-body>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>
-            <app-tooltip message="Editar usuário {{user.name}} ">
-                <img src="assets/images/edit.svg" (click)="goToEdit(user)"  alt="Editar">
-            </app-tooltip>
-            <app-tooltip message="Deletar usuário {{user.name}}">
-                <img src="assets/images/delete.svg" (click)="openModal(user)" alt="Excluir">
-            </app-tooltip>
-        </td>
-    </tr>
+<app-snackbar></app-snackbar>
+
+<div class="table-container">
+    <div class="nav-bar">
+        <app-tooltip message="Adicionar novo usuário">
+            <app-button class='button' buttonStyle="primary" size="md" icon="assets/images/add.svg"
+                (click)="openUserModal()">
+                Adicionar novo usuário
+            </app-button>
+        </app-tooltip>
+        <app-search-bar placeholder="Buscar usuário pelo nome..." [(value)]="searchTerm" (search)="onSearch($event)">
+        </app-search-bar>
+    </div>
+
+    <app-table>
+        <tr table-header>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Ações</th>
+        </tr>
+        @for (user of users; track user.id) {
+        <tr table-body>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <app-tooltip message="Editar usuário {{user.name}} ">
+                    <img src="assets/images/edit.svg" (click)="goToEdit(user)" alt="Editar">
+                </app-tooltip>
+                <app-tooltip message="Deletar usuário {{user.name}}">
+                    <img src="assets/images/delete.svg" (click)="openModal(user)" alt="Excluir">
+                </app-tooltip>
+            </td>
+        </tr>
+        }
+        <tr table-foot>
+            <td class="td-foot">
+                <app-button buttonStyle="primary" (click)="prevPage()" [disabled]="page === 1">Anterior</app-button>
+                <span>Página {{ page }} de {{ totalPages }}</span>
+                <app-button (click)="nextPage()" [disabled]="page === totalPages">Próxima</app-button>
+            <td>
+            <td></td>
+        </tr>
+    </app-table>
+
+    @if(userModalVisible || modalVisible){
+    <div class="overlay"></div>
     }
-
-</app-table>
-
+</div>
 <app-confirm-delete-modal [visible]="modalVisible" title="Excluir Usuário"
     [message]="'Tem certeza que deseja excluir usuário ' + selectUser?.name + '?'" (confirm)="onDelete()"
     (cancel)="cancelDelete()">
 </app-confirm-delete-modal>
 
-<app-user-create 
-[userEdit]="selectUser"
-(close)="closeUserModal()" />
+@if(userModalVisible){
+<app-modal-user-create [visible]="userModalVisible" [userEdit]="selectUser || undefined"
+    (confirm)="handleUserSubmit($event)" (cancel)="cancelCreateOrEdit()" (close)="closeUserModal()">
+</app-modal-user-create>
+}

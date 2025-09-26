@@ -1,6 +1,10 @@
 <div [ngClass]="['search-bar', size]">
-    <input [placeholder]="placeholder" [disabled]="disable" />
-    <span class="icon">
+    <input [placeholder]="placeholder" 
+    [disabled]="disable" 
+    [(ngModel)]="value"
+    (input)="onChange($event)"
+    (keyup.enter)="onEnter($event)"/>
+    <span class="icon" (click)="onEnter()">
         <img [src]="icon" alt="Buscar" />
     </span>
 </div>

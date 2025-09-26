@@ -1,30 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { TableColumn, TableComponent } from '../../../shared/components/table/table.component';
+import { TableComponent } from '../../../shared/components/table/table.component';
 import { User, UserService } from '../../../service/user/user.service';
 import { SnackbarService } from '../../../service/snackbar/snackbar.service';
-import { ConfirmDeleteModalComponent } from "../../../shared/components/confirm-delete-modal/confirm-delete-modal.component";
 import { LoaderComponent } from "../../../shared/components/loader/loader.component";
 import { TooltipComponent } from "../../../shared/components/tooltip/tooltip.component";
 import { Router } from '@angular/router';
-import { UserCreateComponent } from "../user-create/user-create.component";
+import { ButtonComponent } from "../../../shared/components/button/button.component";
+import { SnackbarComponent } from "../../../shared/components/snackbar/snackbar.component";
+import { SearchBarComponent } from "../../../shared/components/search-bar/search-bar.component";
+import { FormsModule } from '@angular/forms';
+import { ConfirmDeleteModalComponent } from '../../modais/confirm-delete-modal/confirm-delete-modal.component';
+import { ModalUserCreateComponent } from '../../modais/modal-user-create/modal-user-create.component';
+
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [TableComponent, ConfirmDeleteModalComponent, LoaderComponent, TooltipComponent, UserCreateComponent],
+  imports: [TableComponent,
+    ConfirmDeleteModalComponent,
+    LoaderComponent,
+    TooltipComponent,
+    ModalUserCreateComponent, 
+    ButtonComponent, 
+    SnackbarComponent, 
+    SearchBarComponent,
+    FormsModule],
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss'
+  styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
   page: number = 1;
   pageSize: number = 10;
+  totalUsers: number = 0;
+  searchTerm: string = '';
 
   loading: boolean = false;
 
-  selectUser: User | null = null;
+  selectUser: User | null | undefined = null;
   modalVisible: boolean = false;
-
   userModalVisible: boolean = false;
 
   constructor(private userService: UserService,
@@ -37,28 +51,35 @@ export class UserListComponent implements OnInit {
 
   loadUsers() {
     this.loading = true;
-
-    this.userService.getUser().subscribe({
-      next: (data) => {
+    
+    this.userService.getUsers(this.page, this.searchTerm).subscribe({
+      next: (response) => {
         setTimeout(() => {
-          this.users = data;
+          const body: any = response.body;
+          this.users = body.data || [];
+          this.totalUsers = body.items ?? 0,
           this.loading = false;
         }, 1500);
       },
       error: (error) => {
         this.snackbarService.showSnackbar({
           message: 'Erro ao carregar usuários.',
-          type: 'success',
+          type: 'error',
         });
       }
     });
+  }
+
+  onSearch(term: string) {
+    this.searchTerm = term;
+    this.page = 1;
+    this.loadUsers();
   }
 
 
   openModal(user: User) {
     this.selectUser = user;
     this.modalVisible = true;
-
   }
 
   onDelete() {
@@ -87,13 +108,20 @@ export class UserListComponent implements OnInit {
     this.loadUsers();
   }
 
+
   cancelDelete() {
     this.selectUser = null;
     this.modalVisible = false;
   }
 
+  cancelCreateOrEdit() {
+    this.selectUser = null;
+    this.userModalVisible = false;
+  }
+
   goToEdit(user: User) {
-    this.router.navigate(['users/edit', user.id]);
+    this.selectUser = user;
+    this.userModalVisible = true;
   }
 
   openUserModal(user?: User) {
@@ -102,13 +130,45 @@ export class UserListComponent implements OnInit {
       name: user.name,
       email: user.email,
       age: user.age
-    } : null;
+    } : undefined;
     this.userModalVisible = true;
+  }
+
+  handleUserSubmit(user: User) {
+    this.loadUsers()
   }
 
   closeUserModal() {
     this.userModalVisible = false;
-    this.selectUser = null;
+    this.selectUser = undefined;
+  }
+
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.loadUsers();
+    }
+  }
+
+  prevPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.loadUsers();
+    }
+  }
+
+  trackById(index: number, user: User) {
+    return user.id;
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalUsers / this.pageSize);
+  }
+
+  get pagedUsers(): User[] {
+    const start = (this.page - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    return this.users.slice(start, end);
   }
 
 

@@ -1,21 +1,11 @@
 <table>
     <thead>
-        <ng-content select="[table-header]"/>
+        <ng-content select="[table-header]" />
     </thead>
     <tbody>
-        <ng-content select="[table-body]"/>
+        <ng-content select="[table-body]" />
     </tbody>
-   <!-- 
     <tfoot>
-        <div class="pagination">
-            <app-button buttonStyle="primary" size="xsm" (click)="prevPage()" [disable]="currentPage === 1">
-                Anterior
-            </app-button>
-            <span> Página {{ currentPage }} de {{ Math.ceil(data.length / pageSize) }}</span>
-            <app-button buttonStyle="primary" size="xsm" (click)="nextPage()" [disable]="currentPage === 1">
-                Próxima
-            </app-button>
-        </div>
+      <ng-content select="[table-foot]" />
     </tfoot>
-    -->
 </table>

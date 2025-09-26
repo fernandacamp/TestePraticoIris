@@ -71,5 +71,36 @@ td img[alt="Excluir"]:hover {
 }
 
 td img[alt="Editar"]:hover {
-  filter: drop-shadow(0 0 3px var(--color-primary-hover));
+  filter: drop-shadow(0 0 3px var(--color-primary-grey));
+}
+
+.td-foot{
+  color: var(--color-text-white);
+  font-weight: var(--font-weight-semi-bold);
+}
+
+.table-container {
+  position: relative;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: not-allowed;
+  }
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.button {
+  margin-bottom: 30px;
 }

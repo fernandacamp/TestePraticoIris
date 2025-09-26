@@ -4,6 +4,7 @@ import { ButtonComponent } from "./shared/components/button/button.component";
 import { filter } from 'rxjs/operators';
 import { TooltipComponent } from "./shared/components/tooltip/tooltip.component";
 import { SnackbarComponent } from "./shared/components/snackbar/snackbar.component";
+import { UserListComponent } from "./users/pages/user-list/user-list.component";
 
 export enum PageType {
   List = 'list',
@@ -15,31 +16,16 @@ export enum PageType {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,
-    ButtonComponent, TooltipComponent, SnackbarComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 
   icon: string = 'assets/images/back.svg';
   pageType: PageType = PageType.Unknown;
 
-  constructor(private router: Router) {
-   this.router.events
-      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        if (event.url.includes('/users/create')) {
-          this.pageType = PageType.Create;
-        } else if (event.url.includes('/users/edit')) {
-          this.pageType = PageType.Edit;
-        } else if (event.url.includes('/users/list')) {
-          this.pageType = PageType.List;
-        } else {
-          this.pageType = PageType.Unknown;
-        }
-      });
-  }
+  constructor(private router: Router) {}
   goToCreateUser() {
     this.router.navigate(['/users/create']);
   }

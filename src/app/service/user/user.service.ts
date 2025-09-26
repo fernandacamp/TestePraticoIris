@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -14,7 +14,6 @@ export interface User {
 })
 export class UserService {
 
-  //private baseUrl = 'http://192.168.0.15:3000/usuarios';
   private baseUrl = 'http://localhost:3000/usuarios';
 
   /**
@@ -27,8 +26,14 @@ export class UserService {
    * Retorna a lista de usuários.
    * @returns Observable contendo um array de usuários.
    */
-  getUser(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUrl);
+  getUsers(page: number = 1, search: string = ''): Observable<HttpResponse<User[]>> {
+    let params = new HttpParams()
+      .set('_page', page);
+
+      if (search && search.trim() !== '') {
+        params = params.set('name', search.trim());
+      }
+    return this.http.get<User[]>(this.baseUrl, { params, observe: 'response' });
   }
 
   /**
