@@ -1,0 +1,25 @@
+.snackbar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: var(--font-size-medium);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.snackbar.success {
+  background-color: var(--color-success);
+}
+
+.snackbar.error {
+  background-color: var(--color-danger);
+}
+
+.snackbar.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}

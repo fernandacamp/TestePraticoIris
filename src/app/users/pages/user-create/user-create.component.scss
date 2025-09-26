@@ -1,0 +1,33 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: left;
+    flex-wrap: wrap;
+}
+
+app-input {
+    margin-bottom: 20px;
+}
+
+label{
+    font-family: var(--font-base);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-grey);
+}
+
+app-button {
+    display: center;
+}
+
+
+.error {
+  color: var(--color-danger); 
+  font-size: var(--font-size-md); 
+  font-weight: var(--font-weight-medium); 
+  font-family: var(--font-base); 
+  line-height: 1.4;
+  margin-bottom: 10px;
+}

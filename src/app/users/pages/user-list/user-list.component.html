@@ -1,1 +1,31 @@
-<p>user-list works!</p>
+@if(loading){
+<app-loader></app-loader>
+}
+
+<app-table [data]="users" [pageSize]="pageSize" [(currentPage)]="page">
+    <tr table-header>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Ações</th>
+    </tr>
+    @for (user of users; track user.id) {
+    <tr table-body>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+            <app-tooltip message="Editar usuário {{user.name}} ">
+                <img src="assets/images/edit.svg" (click)="goToEdit(user)"  alt="Editar">
+            </app-tooltip>
+            <app-tooltip message="Deletar usuário {{user.name}}">
+                <img src="assets/images/delete.svg" (click)="openModal(user)" alt="Excluir">
+            </app-tooltip>
+        </td>
+    </tr>
+    }
+
+</app-table>
+
+<app-confirm-delete-modal [visible]="modalVisible" title="Excluir Usuário"
+    [message]="'Tem certeza que deseja excluir ' + selectUserToDelete?.name + '?'" (confirm)="onDelete()"
+    (cancel)="cancelDelete()">
+</app-confirm-delete-modal>

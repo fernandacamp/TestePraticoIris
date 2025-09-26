@@ -1,0 +1,51 @@
+.page-background {
+    background-color: var(--color-text-peach);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.content-wrapper {
+    background-color: var(--color-bg);
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    color: var(--color-text-white);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semi-bold);
+    border-radius: 8px 8px 0 0;
+}
+
+.topbar .menu {
+    display: flex;
+    gap: 12px;
+}
+
+img {
+    width: 50px;
+    cursor: pointer;
+}
+
+
+.icon {
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}

@@ -1,0 +1,72 @@
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--color-primary);
+    border-radius: 120px;
+    padding: 8px 16px;
+    width: 100%;
+    max-width: 400px;
+
+    input {
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        padding-right: 36px; 
+        background: transparent;
+    }
+
+    .icon {
+        position: absolute;
+        right: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s;
+    }
+
+    .icon:hover {
+        transform: scale(1.1);
+    }
+
+    .icon img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+    }
+}
+
+.search-bar:focus-within {
+    transform: scale(1.03);
+    border-color: var(--color-primary);
+}
+
+/* tamanhos */
+.sm {
+    input {
+        font-size: 14px;
+        padding-right: 28px;
+    }
+}
+
+.md {
+    input {
+        font-size: 16px;
+        padding-right: 36px;
+    }
+}
+
+.lg {
+    input {
+        font-size: 18px;
+        padding-right: 44px;
+    }
+}
+
+input:disabled,
+.icon {
+    cursor: not-allowed;
+    opacity: 0.6;
+}

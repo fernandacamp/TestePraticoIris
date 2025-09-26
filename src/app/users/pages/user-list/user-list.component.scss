@@ -1,0 +1,75 @@
+:host {
+  display: block;
+  font-family: var(--font-base);
+  color: var(--color-text-white);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  background-color: var(--color-bg);
+  padding: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+thead {
+  background-color: var(--color-primary);
+  text-align: left;
+}
+
+th {
+  padding: 12px 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--color-bg-soft);
+}
+
+tbody tr:hover {
+  background-color: var(--color-primary-hover);
+  color: var(--color-text-carbon);
+  font-family: var(--font-base);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semi-bold);
+}
+
+td {
+  padding: 12px 16px;
+  font-size: var(--font-size-md);
+  color: var(--color-text-carbon);
+  border-top: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+td img {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+td img:hover {
+  transform: scale(1.15);
+  opacity: 0.85;
+}
+
+td img[alt="Excluir"]:hover {
+  filter: drop-shadow(0 0 3px var(--color-danger));
+}
+
+td img[alt="Editar"]:hover {
+  filter: drop-shadow(0 0 3px var(--color-primary-hover));
+}

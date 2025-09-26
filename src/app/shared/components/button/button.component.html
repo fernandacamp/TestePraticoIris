@@ -1,1 +1,15 @@
-<button [attr.type] = "type" [ngClass]="['btn', 'style', 'size']" [disabled]="disable"></button>
+<button [attr.type]="type" [ngClass]="['btn', buttonStyle, size ]" [disabled]="disabled">
+    @if(icon && iconPosition === 'left') {
+    <ng-container>
+        <img [src]="icon" alt="" class="icon-left" />
+    </ng-container>
+    }
+    <span>
+        <ng-content></ng-content>
+    </span>
+    @if(icon && iconPosition === 'right') {
+    <ng-container>
+        <img [src]="icon" alt="" class="icon-right" />
+    </ng-container>
+    }
+</button>

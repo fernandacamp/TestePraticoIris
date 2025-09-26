@@ -30,7 +30,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/styles/colors.scss",
+              "src/styles/fonts.scss"
             ],
             "scripts": [],
             "server": "src/main.server.ts",

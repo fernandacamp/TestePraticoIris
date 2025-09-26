@@ -1,1 +1,22 @@
-<app-button style="primary" size="sm">TESTE</app-button>
+<div class="page-background">
+    <div class="content-wrapper">
+        <header class="topbar">
+            <nav class="menu">
+                @if(!(pageType === 'list')){
+                <app-button buttonStyle="primary" size="lg" (click)="goToListUsers()" icon="assets/images/back.svg">
+                    Voltar 
+                </app-button>
+                }
+                @if(!(pageType === 'create' || pageType === 'edit')){
+                <app-tooltip message="Adicionar novo usuário">
+                <img src="assets/images/add_orange.svg" (click)="goToCreateUser()" alt="Adicionar" >
+                </app-tooltip>
+                }
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</div>

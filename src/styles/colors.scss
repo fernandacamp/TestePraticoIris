@@ -1,11 +1,11 @@
 :root {
 
     /* paleta principal */
-    --color-primary: #FF6A1C;
-    --color-primary-hover: #E65A00;
+    --color-primary: #F85408;
+    --color-primary-hover: #F8AE67; 
 
-    --color-accent: #FFA540;
-    --color-accent-light: #FFB368; 
+    --color-danger: #ED1C24;
+    --color-danger-hover: #ED8383;
 
     --color-success: #25D366;
     --color-success-dark: #1DB954;
@@ -15,8 +15,11 @@
     --color-bg: #FFFFFF;
 
     /* cores de texto */
-    --color-text: #000000;
-    --color-text-muted: #333333;
+    --color-text-black: #000000;
+    --color-text-carbon: #333333;
+    --color-text-white: #F6F8F5;
+    --color-text-grey: #A7A8A6;
+    --color-text-peach: #FFF3E8;
 
     /* cores de borda */
     --color-border: #E5E5E5;

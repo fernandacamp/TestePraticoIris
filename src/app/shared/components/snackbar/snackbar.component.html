@@ -1,1 +1,3 @@
-<p>snackbar works!</p>
+<div [ngClass]="['snackbar', type, visible ? 'visible' : '']">
+  {{ message }}
+</div>
