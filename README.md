@@ -1,27 +1,117 @@
-# TestePraticoDesenvolvedorFrontEnd
+# 📝 Teste Prático – Desenvolvedor Front-End Angular
+**Empresa:** Sistema IRIS
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+Este projeto foi desenvolvido como parte do processo seletivo para a vaga de **Desenvolvedor Front-End Angular**.
+A aplicação permite gerenciar uma lista de usuários (CRUD completo) consumindo uma **API simulada via JSON Server**.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Tecnologias Utilizadas
 
-## Code scaffolding
+- [Angular](https://angular.io/) 17+
+- [JSON Server](https://github.com/typicode/json-server) (API Fake)
+- [TypeScript](https://www.typescriptlang.org/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## ⚙️ Funcionalidades
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Listagem de usuários em tabela (Nome, E-mail, Ações).
+- Filtro de pesquisa por nome.
+- Adição e edição de usuários com formulário reativo.
+- Edição e exclusão diretamente pela tabela.
+- Validações de formulário:
+  - Nome obrigatório (mínimo 3 caracteres).
+  - E-mail obrigatório e no formato válido.
+  - Idade opcional (≥ 18 anos).
+- Mensagens de erro em campos inválidos.
+- Botão de envio desabilitado enquanto o formulário não é válido.
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 📂 Estrutura de Pastas
 
-## Running end-to-end tests
+```
+src/
+├── app/
+│   ├── services/
+│   │   ├── snackbar/
+│   │   └── users/
+│   ├── shared/components/
+│   │   ├── button/
+│   │   ├── input/
+│   │   ├── loader/
+│   │   ├── modal/
+│   │   ├── search-bar/
+│   │   ├── snackbar/
+│   │   ├── table/
+│   │   └── tooltip/
+│   ├── users/modais/
+│   │   ├── confirm-delete-modal/
+│   │   └── modal-user-create/
+│   ├── users/pages/
+│   │   └── user-list/
+│   ├── app.component.ts / .html / .css
+│   ├── app.config.ts / app.routes.ts
+├── assets/images/
+├── mock/db.json
+├── styles/
+├── custom-theme.scss
+└── index.html
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## ▶️ Como Rodar o Projeto
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Pré-requisitos
+Antes de rodar a aplicação, certifique-se de ter instalados:
+
+- **Node.js**  
+- **Angular CLI 17**: `npm install -g @angular/cli@17`  
+- **JSON Server**: `npm install -g json-server`
+
+### Passo 1: Clonar o repositório
+
+```bash
+git clone https://github.com/fernandacamp/TestePraticoIris.git
+cd nome-do-repositorio
+```
+
+### Passo 2: Instalar as dependências
+
+```bash
+npm install
+```
+
+### Passo 3: Rodar a aplicação Angular
+
+```bash
+npm start
+```
+> A aplicação ficará disponível em `http://localhost:4200/`.
+> O servidor será iniciado em `http://localhost:3000/usuarios`.
+
+---
+
+## 📖 Endpoints da API
+
+- `GET /usuarios` → Lista todos os usuários  
+- `POST /usuarios` → Cria um novo usuário  
+- `PUT /usuarios/:id` → Atualiza um usuário existente  
+- `DELETE /usuarios/:id` → Remove um usuário
+
+---
+
+## 🌟 Deploy 
+A aplicação pode ser acessada em: `https://seu-projeto-angular.vercel.app`
+- Servidor (Render)
+- Aplicação (Netlify)
+
+
+---
+
+## 👩🏻‍💻 Autora
+
+**Fernanda Campolin**  
+🔗 [LinkedIn](https://linkedin.com/in/fernandacampolin) | [GitHub](https://github.com/fernandacampolin)
